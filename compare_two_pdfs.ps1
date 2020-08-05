@@ -22,21 +22,21 @@ Function Compare-TwoPdfs
    # Instead, read the files into memory first to avoid this.
 
    $bytes1 = [System.IO.File]::ReadAllBytes($tempJpeg1)
-   $memory_stream1 = New-Object System.IO.MemoryStream(, $bytes1)
-   $bitmap1 = [System.Drawing.Image]::FromStream($memory_stream1)
+   $memoryStream1 = New-Object System.IO.MemoryStream(, $bytes1)
+   $bitmap1 = [System.Drawing.Image]::FromStream($memoryStream1)
 
    $bytes2 = [System.IO.File]::ReadAllBytes($tempJpeg2)
-   $memory_stream2 = New-Object System.IO.MemoryStream(, $bytes2)
-   $bitmap2 = [System.Drawing.Image]::FromStream($memory_stream2)
+   $memoryStream2 = New-Object System.IO.MemoryStream(, $bytes2)
+   $bitmap2 = [System.Drawing.Image]::FromStream($memoryStream2)
 
-   $bitmap_height = [Math]::Max($bitmap1.Height, $bitmap2.Height)
-   $bitmap_width = [Math]::Max($bitmap1.Width, $bitmap2.Width)
+   $bitmapHeight = [Math]::Max($bitmap1.Height, $bitmap2.Height)
+   $bitmapWidth = [Math]::Max($bitmap1.Width, $bitmap2.Width)
 
-   $bitmap_diff = New-Object System.Drawing.Bitmap $bitmap_width, $bitmap_height
+   $bitmap_diff = New-Object System.Drawing.Bitmap $bitmapWidth, $bitmapHeight
 
-   For ($y = [UInt64] 0; $y -Lt $bitmap_Height; $y += 1)
+   For ($y = [UInt64] 0; $y -Lt $bitmapHeight; $y += 1)
    {
-      For ($x = [UInt64] 0; $x -Lt $bitmap_width; $x += 1)
+      For ($x = [UInt64] 0; $x -Lt $bitmapWidth; $x += 1)
       {
          If ($x -Lt $bitmap1.Width -And $y -Lt $bitmap1.Height)
          {
